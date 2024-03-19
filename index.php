@@ -5,11 +5,18 @@ include_once 'conexao.php';
 $buscar_clientes = "SELECT * FROM clientes";
 $query_clientes = mysqli_query($conex, $buscar_clientes);
 
+if($_POST){
+  $logradouro = $_POST['logradouro'];
+  $bairro = $_POST['bairro'];
+  $cidade = $_POST['cidade'];
+  $uf = $_POST['uf'];
+  $cep = $_Post['cep'];
+}
 ?>
 
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <title>Title</title>
     <!-- Required meta tags -->
@@ -50,18 +57,56 @@ $query_clientes = mysqli_query($conex, $buscar_clientes);
                     $cep = $receber_clientes['cli_cep'];
             ?>
               <tr>
-                  <td scope="row"><?php echo $id ?></td>
-                  <td><?php echo $nome ?></td>
-                  <td><?php echo $logradouro ?></td>
-                  <td><?php echo $numero ?></td>
-                  <td><?php echo $complemento ?></td>
-                  <td><?php echo $bairro ?></td>
-                  <td><?php echo $cidade ?></td>
-                  <td><?php echo $uf ?></td>
-                  <td><?php echo $cep ?></td>
+                  <form action="editar.php" method="post">
+                      <td scope="row"><?php echo $id ?></td>
+                      <td><input type="text" name="nome" value="<?php echo $nome; ?>" size="15"></td>
+                      <td><input type="text" name="logradouro" value="<?php echo $logradouro; ?>" size="25"></td>
+                      <td><input type="text" name="numero" value="<?php echo $numero; ?>" size="4"></td>
+                      <td><input type="text" name="complemento" value="<?php echo $complemento; ?>" size="8"></td>
+                      <td><input type="text" name="bairro" value="<?php echo $bairro; ?>" size="10"></td>
+                      <td><input type="text" name="cidade" value="<?php echo $cidade; ?>" size="15"></td>
+                      <td><input type="text" name="uf" value="<?php echo $uf; ?>" size="3"></td>
+                      <td><input type="text" name="cep" value="<?php echo $cep; ?>" size="8"></td>
+                      <td>
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <input type="submit" value="Editar"> 
+                      </td>   
+                  </form>
+                  <td> 
+                    <form action="excluir.php" method="post">
+                      <input type="hidden" name="id" value="<?php echo $id?>" size="4">
+                      <input type="submit" value="Excluir">
+                    </form>
+                  </td>
               </tr>
 
               <?php }; ?>
+              <tr>
+                <form action=" cadastro.php" method="post" id="cadastroForm">
+                  <td></td>
+                  <td><input type="text" name="nome" size="15"></td>
+                  <td><input type="text" name="logradouro" id="logradouro" size="25"></td>
+                  <td><input type="text" name="numero" size="4"></td>
+                  <td><input type="text" name="complemento" size="8"></td>
+                  <td><input type="text" name="bairro" id="bairro" size="10"></td>
+                  <td><input type="text" name="cidade" id="cidade" size="15"></td>
+                  <td><input type="text" name="uf" id="uf" size="3"></td>
+                  <td><input type="text" name="cep" id="cep" size="8"></td>
+                  <td><input type="submit" value="Cadastro"></td>
+                </form>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="text" name="cepConsulta" id="cepConsulta" size="8"></td>
+                <td><input type="submit" value="Buscar CEP" id="buscarCep"></td>
+              </tr>
     </tbody>
   </table>
 </div>
@@ -71,4 +116,8 @@ $query_clientes = mysqli_query($conex, $buscar_clientes);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
+     
+    <script src="JQuery.js"></script>
+    <script src="Javascript.js"></script>
+
 </html>
